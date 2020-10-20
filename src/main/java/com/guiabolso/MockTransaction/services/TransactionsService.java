@@ -8,6 +8,7 @@ import com.guiabolso.MockTransaction.services.mock.MockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -23,10 +24,20 @@ public class TransactionsService {
         try {
 
 
-            var t = stringHelper.validateDate(mes);
+            stringHelper.validateDateString(mes);
+            List<TransactionOutputDTO> transactionOutputDTOList = mockService.makeMockTransactions(id, ano, mes);
 
-            List<TransactionOutputDTO> transactionOutputDTOList = mockService.makeMock(id, ano, mes);
+            //transactionOutputDTOList.stream()
+                    //.sorted((d1, d2) -> d1.getData().compareTo(d2.getData()))
+                    //;
+/*
+            depositTransactionAtmOutDTOList = depositTransactionList.stream()
+                    .filter(depositTransaction -> ! depositTransaction.getType().equals(DepositTransaction.TypeEnum.BRANCH_CHANGED))
+                    .map(DepositTransactionAtmOutDTO::new)
+                    .sorted((d1, d2) -> d1.getCreationDate().compareTo(d2.getCreationDate()))
+                    .collect(Collectors.toList());
 
+*/
             return transactionOutputDTOList;
         } catch (BusinessRuleException ex) {
             throw new BusinessRuleException(ex.getErrorDto());

@@ -38,5 +38,20 @@ public class MockHelpers {
 
     }
 
+    public static String randomDateBigMonth(int random,String year, String month, int count) {
+
+        int correctMonth = random -1;
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, Integer.parseInt(year));
+        c.set(Calendar.MONTH, correctMonth);
+        c.set(Calendar.DAY_OF_MONTH, count);
+
+        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        return sdf.format(c.getTime()).toString();
+
+    }
+
 
 }
