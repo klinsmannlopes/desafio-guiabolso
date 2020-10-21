@@ -28,52 +28,6 @@ public class MockHelpers {
 
     }
 
-    public static String randomDate(String year, String month, int count) {
-
-        int correctMonth = Integer.parseInt(month) -1;
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, Integer.parseInt(year));
-        c.set(Calendar.MONTH, correctMonth);
-        c.set(Calendar.DAY_OF_MONTH, count);
-
-        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        return sdf.format(c.getTime()).toString();
-
-    }
-
-    public static String randomDateBigMonth(int random,String year, String month, int count) {
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, Integer.parseInt(year));
-        c.set(Calendar.MONTH, getMonthCorrectEnum(random, Integer.parseInt(month)));
-        c.set(Calendar.DAY_OF_MONTH, count);
-
-        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        return sdf.format(c.getTime()).toString();
-
-    }
-
-    public static Timestamp randomDateTimestamp(int random, String year, String month, int count) {
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, Integer.parseInt(year));
-        c.set(Calendar.MONTH, getMonthCorrectEnum(random, Integer.parseInt(month)));
-        c.set(Calendar.DAY_OF_MONTH, count);
-
-        Timestamp ts = new Timestamp(c.getTimeInMillis());
-
-        long test_timestamp = ts.getTime();
-        LocalDateTime date =
-                LocalDateTime.ofInstant(Instant.ofEpochMilli(test_timestamp ), TimeZone
-                        .getDefault().toZoneId());
-
-        System.out.println(date);
-
-        return ts;
-    }
-
     public static Long randomDateLong(int random,String year,String month, int count) {
 
         Calendar c = Calendar.getInstance();
@@ -86,6 +40,7 @@ public class MockHelpers {
         return dateTimestamp.getTime();
     }
 
+    //Pegando numero correto para setar o mês corretamente
     private static int getMonthCorrectEnum(int random, int month) {
 
         int correctMonth = random -1;

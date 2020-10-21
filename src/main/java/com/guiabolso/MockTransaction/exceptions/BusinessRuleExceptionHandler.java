@@ -12,6 +12,7 @@ import java.util.ArrayList;
 @RestControllerAdvice
 public class BusinessRuleExceptionHandler {
 
+	//manipulador da exceptions lançadas que possui alguma regra de négocio
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(BusinessRuleException.class)
 	public ApiErrorDTO handle(BusinessRuleException exception) {

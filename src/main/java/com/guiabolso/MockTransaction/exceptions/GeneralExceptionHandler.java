@@ -17,6 +17,7 @@ public class GeneralExceptionHandler {
 	@Autowired
 	private BusinessRuleExceptionHandler businessHandler;
 
+	//manipulador da exceptions lançadas
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(Exception.class)
 	public ApiErrorDTO handle(Exception exception) {

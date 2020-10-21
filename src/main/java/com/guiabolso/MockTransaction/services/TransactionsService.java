@@ -23,9 +23,11 @@ public class TransactionsService {
     public List<TransactionOutputDTO> find(String id, String year, String month) throws BusinessRuleException {
         try {
 
+            //validando formato do conjunto de dados
             validateYearString(id, year, month);
             List<TransactionOutputDTO> transactionOutputDTOList = mockService.makeMockTransactions(id, year, month);
 
+            //ordenando as transações
             return transactionOutputDTOList.stream()
                     .sorted((transaction1, transaction2) -> transaction1.getData().compareTo(transaction2.getData())
                     ).collect(Collectors.toList());
