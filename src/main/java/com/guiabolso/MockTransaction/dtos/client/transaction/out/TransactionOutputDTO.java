@@ -14,7 +14,7 @@ public class TransactionOutputDTO {
 
     private String descricao;
     private Long data;
-    private int valor;
+    private Integer valor;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean duplicated;
 

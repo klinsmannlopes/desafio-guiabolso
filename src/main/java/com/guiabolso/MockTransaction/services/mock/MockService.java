@@ -76,7 +76,7 @@ public class MockService {
             });
         }
 
-        if (!listMonths.isEmpty() && listMonths.size() >= 1) {
+        if (!listMonths.isEmpty() && listMonths.size() >= 12) {
             createTransactionsDuplicated(transactions, year, month);
         }
 
@@ -101,7 +101,6 @@ public class MockService {
             int randomDescription = randomNumberDescription.nextInt((60 - 10) + 1) + 10;
 
             String description = MockHelpers.randomAlhaNumeric(randomDescription, generateDescription);
-            String date = MockHelpers.randomDateBigMonth(randomMonth ,year, month, randomDay);
             Long dateLong = MockHelpers.randomDateLong(randomMonth ,year, month ,randomDay);
 
             TransactionOutputDTO transactionOutputDTO = new TransactionOutputDTO();
