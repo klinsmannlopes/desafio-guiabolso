@@ -2,7 +2,6 @@ package com.guiabolso.MockTransaction.exceptions.errors;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
@@ -12,31 +11,12 @@ public class ErrorDTO {
 	private String errorSource;
 	private String errorReason;
 	private String errorDetail;
-	private HttpStatus httpStatus;
-	private Object errorsDescription;
 	
-	public ErrorDTO() {
-	}
-	
-	public ErrorDTO(Integer errorCode, String errorSource, String errorReason) {
-		this(errorCode, errorSource, errorReason, null, null);
-	}
-	
-	public ErrorDTO(Integer errorCode, String errorSource, String errorReason, String errorDetail, HttpStatus httpStatus) {
+	public ErrorDTO(Integer errorCode, String errorSource, String errorReason, String errorDetail) {
 		this.errorCode = errorCode;
 		this.errorSource = errorSource;
 		this.errorReason = errorReason;
 		this.errorDetail = errorDetail;
-		this.httpStatus = httpStatus;
-	}
-
-	public ErrorDTO(Integer errorCode, String errorSource, String errorReason, String errorDetail, HttpStatus httpStatus, Object errorsDescription) {
-		this.errorCode = errorCode;
-		this.errorSource = errorSource;
-		this.errorReason = errorReason;
-		this.errorDetail = errorDetail;
-		this.httpStatus = httpStatus;
-		this.errorsDescription = errorsDescription;
 	}
 
 	public ErrorDTO(Exception exception) {

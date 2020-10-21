@@ -16,7 +16,7 @@ public class BusinessRuleExceptionHandler {
 	@ExceptionHandler(BusinessRuleException.class)
 	public ApiErrorDTO handle(BusinessRuleException exception) {
 		ApiErrorDTO error = new ApiErrorDTO();
-		error.setErrors(new ArrayList<ErrorDTO>());
+		error.setErrors(new ArrayList<>());
 		error.getErrors().add(exception.getErrorDto());
 		exception.getErrorDto();
 		return error;

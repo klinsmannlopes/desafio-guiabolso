@@ -15,8 +15,6 @@ public class DateHelper {
 					LocalDateTime.ofInstant(Instant.ofEpochMilli(transaction.getData() ), TimeZone
 							.getDefault().toZoneId());
 
-			System.out.println(date);
-
 		return date;
 	}
 

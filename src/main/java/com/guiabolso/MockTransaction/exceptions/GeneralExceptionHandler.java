@@ -24,7 +24,7 @@ public class GeneralExceptionHandler {
 			return businessHandler.handle((BusinessRuleException) exception);
 		} else {
 			ApiErrorDTO error = new ApiErrorDTO();
-			error.setErrors(new ArrayList<ErrorDTO>());
+			error.setErrors(new ArrayList<>());
 			error.getErrors().add(new ErrorDTO(exception));
 			return error;
 		}

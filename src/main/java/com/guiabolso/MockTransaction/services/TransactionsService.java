@@ -3,13 +3,11 @@ package com.guiabolso.MockTransaction.services;
 import com.guiabolso.MockTransaction.dtos.client.transaction.out.TransactionOutputDTO;
 import com.guiabolso.MockTransaction.enums.BusinessRulesEnum;
 import com.guiabolso.MockTransaction.exceptions.BusinessRuleException;
-import com.guiabolso.MockTransaction.helpers.DateHelper;
 import com.guiabolso.MockTransaction.helpers.StringHelper;
 import com.guiabolso.MockTransaction.services.mock.MockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -21,9 +19,6 @@ public class TransactionsService {
 
     @Autowired
     private StringHelper stringHelper;
-
-    @Autowired
-    private DateHelper dateHelper;
 
     public List<TransactionOutputDTO> find(String id, String year, String month) throws BusinessRuleException {
         try {
