@@ -3,10 +3,12 @@ package com.guiabolso.MockTransaction.services;
 import com.guiabolso.MockTransaction.dtos.client.transaction.out.TransactionOutputDTO;
 import com.guiabolso.MockTransaction.enums.BusinessRulesEnum;
 import com.guiabolso.MockTransaction.exceptions.BusinessRuleException;
+import com.guiabolso.MockTransaction.helpers.DateHelper;
 import com.guiabolso.MockTransaction.helpers.StringHelper;
 import com.guiabolso.MockTransaction.services.mock.MockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,31 +22,32 @@ public class TransactionsService {
     @Autowired
     private StringHelper stringHelper;
 
-    public List<TransactionOutputDTO> find(String id, String ano, String mes) throws BusinessRuleException {
+    @Autowired
+    private DateHelper dateHelper;
+
+    public List<TransactionOutputDTO> find(String id, String year, String month) throws BusinessRuleException {
         try {
 
+            validateYearString(id, year, month);
+            List<TransactionOutputDTO> transactionOutputDTOList = mockService.makeMockTransactions(id, year, month);
 
-            stringHelper.validateDateString(mes);
-            List<TransactionOutputDTO> transactionOutputDTOList = mockService.makeMockTransactions(id, ano, mes);
+            return transactionOutputDTOList.stream()
+                    .sorted((transaction1, transaction2) -> transaction1.getData().compareTo(transaction2.getData())
+                    ).collect(Collectors.toList());
 
-            //transactionOutputDTOList.stream()
-                    //.sorted((d1, d2) -> d1.getData().compareTo(d2.getData()))
-                    //;
-/*
-            depositTransactionAtmOutDTOList = depositTransactionList.stream()
-                    .filter(depositTransaction -> ! depositTransaction.getType().equals(DepositTransaction.TypeEnum.BRANCH_CHANGED))
-                    .map(DepositTransactionAtmOutDTO::new)
-                    .sorted((d1, d2) -> d1.getCreationDate().compareTo(d2.getCreationDate()))
-                    .collect(Collectors.toList());
-
-*/
-            return transactionOutputDTOList;
         } catch (BusinessRuleException ex) {
             throw new BusinessRuleException(ex.getErrorDto());
         } catch (Exception e) {
-            throw new BusinessRuleException(BusinessRulesEnum.FORMAT_DATE_INVALID, getClass(), "Datas incorresrta teste.");
+            throw new BusinessRuleException(BusinessRulesEnum.ERROR_SERVER, getClass(), e.getMessage());
         }
 
     }
+
+    public void validateYearString(String id,String ano, String mes) throws BusinessRuleException {
+        stringHelper.validateIdString(id);
+        stringHelper.validateYearString(ano);
+        stringHelper.validateMonthString(mes);
+    }
+
 
 }

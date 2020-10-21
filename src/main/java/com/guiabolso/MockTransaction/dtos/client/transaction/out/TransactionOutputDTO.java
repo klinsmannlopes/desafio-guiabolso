@@ -6,18 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Min;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransactionOutputDTO {
 
-    @Min(10)
     private String descricao;
-
-    private String data;
+    private Long data;
     private int valor;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean duplicated;
